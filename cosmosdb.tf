@@ -56,6 +56,9 @@ module "cosmos" {
       subnet_resource_id            = var.network_privatelink_subnet_id
       subresource_name              = "SQL"
       private_dns_zone_resource_ids = [azurerm_private_dns_zone.cosmos_sql.id]
+      application_security_group_associations = {
+        cosmos = var.network_asg_cosmos_id
+      }
     }
   }
 

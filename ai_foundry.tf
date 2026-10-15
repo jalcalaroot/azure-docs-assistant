@@ -125,3 +125,10 @@ resource "azurerm_private_endpoint" "ai_foundry" {
     ]
   }
 }
+
+# El PE se crea con azurerm_private_endpoint directo (sin modulo AVM), asi que
+# la pertenencia al ASG es un recurso aparte. Ver variables.tf.
+resource "azurerm_private_endpoint_application_security_group_association" "ai_foundry" {
+  private_endpoint_id           = azurerm_private_endpoint.ai_foundry.id
+  application_security_group_id = var.network_asg_ai_foundry_id
+}

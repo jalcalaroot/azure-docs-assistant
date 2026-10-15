@@ -50,6 +50,31 @@ variable "network_privatelink_subnet_id" {
   type        = string
 }
 
+variable "network_asg_function_id" {
+  description = "ID del ASG asg-function de azure-virtual-network (output application_security_group_ids). Asocia su Private Endpoint de entrada (lo alcanza APIM) de la Function App: sin esta asociacion, la regla de nsg-privatelink no le llega y el trafico queda bloqueado."
+  type        = string
+}
+
+variable "network_asg_cosmos_id" {
+  description = "ID del ASG asg-cosmos de azure-virtual-network (output application_security_group_ids). Asocia su Private Endpoint (lo alcanza la Function) de Cosmos DB: sin esta asociacion, la regla de nsg-privatelink no le llega y el trafico queda bloqueado."
+  type        = string
+}
+
+variable "network_asg_storage_id" {
+  description = "ID del ASG asg-storage de azure-virtual-network (output application_security_group_ids). Asocia sus Private Endpoints de blob, cola y tabla de el storage de la Function App: sin esta asociacion, la regla de nsg-privatelink no le llega y el trafico queda bloqueado."
+  type        = string
+}
+
+variable "network_asg_ai_foundry_id" {
+  description = "ID del ASG asg-ai-foundry de azure-virtual-network (output application_security_group_ids). Asocia su Private Endpoint de AI Foundry: sin esta asociacion, la regla de nsg-privatelink no le llega y el trafico queda bloqueado."
+  type        = string
+}
+
+variable "network_asg_content_safety_id" {
+  description = "ID del ASG asg-content-safety de azure-virtual-network (output application_security_group_ids). Asocia su Private Endpoint de Content Safety: sin esta asociacion, la regla de nsg-privatelink no le llega y el trafico queda bloqueado."
+  type        = string
+}
+
 variable "network_apim_subnet_id" {
   description = <<-EOT
     apim_subnet_id de azure-virtual-network (snet-apim, 10.0.74.0/24, sin

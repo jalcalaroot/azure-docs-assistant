@@ -80,7 +80,7 @@ Defaults live in [`variables.tf`](variables.tf). The ones you will most likely t
 | Variable | Default | Notes |
 |---|---|---|
 | `subscription_id`, `tenant_id`, `apim_publisher_email` | none | via `TF_VAR_*` |
-| `network_*` (5 variables) | none | outputs of `azure-virtual-network` |
+| `network_*` (5 variables) and `network_asg_*` (5 variables) | none | outputs of `azure-virtual-network` (`application_security_group_ids` for the ASGs) |
 | `resource_group_name` / `location` | `jalcalaroot` / `eastus` | |
 | `function_app_name`, `apim_name`, `cosmos_account_name` | `func-jalcalaroot-agent`, `apim-jalcalaroot-agent`, `cosmos-agent-platform` | globally unique |
 | `chat_model_name` / `chat_model_version` | `gpt-4.1-mini` / `2025-04-14` | non-reasoning model, accepts `temperature` |
@@ -105,6 +105,6 @@ GitHub Actions authenticated to Azure through OIDC, with no stored credentials.
 | `terraform-apply.yml` | Push to `main` | `agent-platform-agent` | plan and apply |
 | `gitleaks.yml` | PR / push | none | Secret scanning |
 
-Both identities live in the persistent [`ci/`](ci) root. Required repository variables: `ARM_CLIENT_ID_AGENT`, `ARM_CLIENT_ID_PLAN`, `ARM_TENANT_ID`, `ARM_SUBSCRIPTION_ID`, `NETWORK_PRIVATELINK_SUBNET_ID`, `NETWORK_APIM_SUBNET_ID`, `NETWORK_FUNC_SUBNET_ID`, `NETWORK_VNET_ID`, `NETWORK_LOG_ANALYTICS_WORKSPACE_ID`; required secret: `APIM_PUBLISHER_EMAIL`.
+Both identities live in the persistent [`ci/`](ci) root. Required repository variables: `ARM_CLIENT_ID_AGENT`, `ARM_CLIENT_ID_PLAN`, `ARM_TENANT_ID`, `ARM_SUBSCRIPTION_ID`, `NETWORK_PRIVATELINK_SUBNET_ID`, `NETWORK_APIM_SUBNET_ID`, `NETWORK_FUNC_SUBNET_ID`, `NETWORK_VNET_ID`, `NETWORK_LOG_ANALYTICS_WORKSPACE_ID`, `NETWORK_ASG_FUNCTION_ID`, `NETWORK_ASG_COSMOS_ID`, `NETWORK_ASG_STORAGE_ID`, `NETWORK_ASG_AI_FOUNDRY_ID`, `NETWORK_ASG_CONTENT_SAFETY_ID`; required secret: `APIM_PUBLISHER_EMAIL`.
 
 Design decisions, known gaps and project history are in [CLAUDE.md](CLAUDE.md).
