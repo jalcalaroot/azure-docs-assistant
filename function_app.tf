@@ -51,6 +51,9 @@ module "function_app_storage" {
       subnet_resource_id            = var.network_privatelink_subnet_id
       subresource_name              = "blob"
       private_dns_zone_resource_ids = [data.azurerm_private_dns_zone.blob.id]
+      application_security_group_associations = {
+        storage = var.network_asg_storage_id
+      }
     }
     # El host de Functions (AzureWebJobsStorage por identidad) y Durable
     # Functions (provider Azure Storage) usan tambien cola y tabla, no solo
@@ -60,12 +63,18 @@ module "function_app_storage" {
       subnet_resource_id            = var.network_privatelink_subnet_id
       subresource_name              = "queue"
       private_dns_zone_resource_ids = [azurerm_private_dns_zone.queue.id]
+      application_security_group_associations = {
+        storage = var.network_asg_storage_id
+      }
     }
     table = {
       name                          = "pe-${var.function_app_storage_account_name}-table"
       subnet_resource_id            = var.network_privatelink_subnet_id
       subresource_name              = "table"
       private_dns_zone_resource_ids = [azurerm_private_dns_zone.table.id]
+      application_security_group_associations = {
+        storage = var.network_asg_storage_id
+      }
     }
   }
 }
@@ -241,6 +250,9 @@ module "function_app" {
     sites = {
       subnet_resource_id            = var.network_privatelink_subnet_id
       private_dns_zone_resource_ids = [azurerm_private_dns_zone.azurewebsites.id]
+      application_security_group_associations = {
+        function = var.network_asg_function_id
+      }
     }
   }
 
