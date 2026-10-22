@@ -32,7 +32,7 @@ Public endpoints: `POST /policyhub/ask`, `POST /policyhub/ingest`, `GET /policyh
 | Azure AI Foundry (`AIServices`) | `text-embedding-3-small` and `gpt-4.1-mini` deployments | [Overview](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-ai-foundry) |
 | Azure AI Content Safety | Prompt Shields on input, severity filter on output | [Overview](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/overview) |
 | Function App (Flex Consumption) + storage | FastAPI and Durable Functions, managed identity only | [`avm-res-web-site` 0.23.0](https://registry.terraform.io/modules/Azure/avm-res-web-site/azurerm/0.23.0), [`avm-res-storage-storageaccount` 0.10.0](https://registry.terraform.io/modules/Azure/avm-res-storage-storageaccount/azurerm/0.10.0) |
-| API Management (Developer, VNet External) | Public gateway: JWT validation and rate limiting | [`avm-res-apimanagement-service` 0.9.0](https://registry.terraform.io/modules/Azure/avm-res-apimanagement-service/azurerm/0.9.0) |
+| API Management (Developer, VNet External) | Public gateway: JWT validation and rate limiting; its public IP sends logs and metrics to Log Analytics | [`avm-res-apimanagement-service` 0.9.0](https://registry.terraform.io/modules/Azure/avm-res-apimanagement-service/azurerm/0.9.0) |
 | Application Insights | Function App telemetry | [`avm-res-insights-component` 0.4.0](https://registry.terraform.io/modules/Azure/avm-res-insights-component/azurerm/0.4.0) |
 | App Registration (Entra ID) | `access_as_user` scope validated by APIM | [Register an app](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) |
 | Role assignments | RBAC for the Function App identity | [`avm-res-authorization-roleassignment` 0.3.1](https://registry.terraform.io/modules/Azure/avm-res-authorization-roleassignment/azurerm/0.3.1) |
@@ -102,7 +102,7 @@ GitHub Actions authenticated to Azure through OIDC, with no stored credentials.
 | Workflow | Trigger | Identity | What it does |
 |---|---|---|---|
 | `terraform-plan.yml` | Pull request | `agent-platform-plan` (read-only) | fmt, validate, tflint, Checkov, plan posted on the PR |
-| `terraform-apply.yml` | Push to `main` | `agent-platform-agent` | plan and apply |
+| `terraform-apply.yml` | Manual (`workflow_dispatch`) | `agent-platform-agent` | plan and apply |
 | `gitleaks.yml` | PR / push | none | Secret scanning |
 
 Both identities live in the persistent [`ci/`](ci) root. Required repository variables: `ARM_CLIENT_ID_AGENT`, `ARM_CLIENT_ID_PLAN`, `ARM_TENANT_ID`, `ARM_SUBSCRIPTION_ID`, `NETWORK_PRIVATELINK_SUBNET_ID`, `NETWORK_APIM_SUBNET_ID`, `NETWORK_FUNC_SUBNET_ID`, `NETWORK_VNET_ID`, `NETWORK_LOG_ANALYTICS_WORKSPACE_ID`; required secret: `APIM_PUBLISHER_EMAIL`.

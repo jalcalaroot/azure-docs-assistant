@@ -28,6 +28,20 @@ resource "azurerm_public_ip" "apim" {
   tags                = local.tags
 }
 
+resource "azurerm_monitor_diagnostic_setting" "apim_public_ip" {
+  name                       = "diag-pip-${var.apim_name}"
+  target_resource_id         = azurerm_public_ip.apim.id
+  log_analytics_workspace_id = var.network_log_analytics_workspace_id
+
+  enabled_log {
+    category_group = "allLogs"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
+  }
+}
+
 module "apim" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-apimanagement-service/azurerm"
