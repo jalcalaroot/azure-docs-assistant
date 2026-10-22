@@ -102,7 +102,7 @@ GitHub Actions authenticated to Azure through OIDC, with no stored credentials.
 | Workflow | Trigger | Identity | What it does |
 |---|---|---|---|
 | `terraform-plan.yml` | Pull request | `agent-platform-plan` (read-only) | fmt, validate, tflint, Checkov, plan posted on the PR |
-| `terraform-apply.yml` | Push to `main` | `agent-platform-agent` | plan and apply |
+| `terraform-apply.yml` | Manual (`workflow_dispatch`) | `agent-platform-agent` | plan and apply |
 | `gitleaks.yml` | PR / push | none | Secret scanning |
 
 Both identities live in the persistent [`ci/`](ci) root. Required repository variables: `ARM_CLIENT_ID_AGENT`, `ARM_CLIENT_ID_PLAN`, `ARM_TENANT_ID`, `ARM_SUBSCRIPTION_ID`, `NETWORK_PRIVATELINK_SUBNET_ID`, `NETWORK_APIM_SUBNET_ID`, `NETWORK_FUNC_SUBNET_ID`, `NETWORK_VNET_ID`, `NETWORK_LOG_ANALYTICS_WORKSPACE_ID`; required secret: `APIM_PUBLISHER_EMAIL`.
