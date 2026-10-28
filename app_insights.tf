@@ -5,7 +5,7 @@
 module "app_insights" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-insights-component/azurerm"
-  version = "0.4.0"
+  version = "0.5.0"
 
   name                = "appi-agent-platform"
   location            = var.location
