@@ -163,7 +163,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "azurewebsites" {
 module "function_app" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-web-site/azurerm"
-  version = "0.23.0"
+  version = "0.24.1"
 
   location                 = var.location
   name                     = var.function_app_name
