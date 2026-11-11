@@ -27,6 +27,11 @@ env:
   TF_VAR_network_function_app_subnet_id: ${{ vars.NETWORK_FUNC_SUBNET_ID }}
   TF_VAR_network_vnet_id: ${{ vars.NETWORK_VNET_ID }}
   TF_VAR_network_log_analytics_workspace_id: ${{ vars.NETWORK_LOG_ANALYTICS_WORKSPACE_ID }}
+  TF_VAR_network_asg_function_id: ${{ vars.NETWORK_ASG_FUNCTION_ID }}
+  TF_VAR_network_asg_cosmos_id: ${{ vars.NETWORK_ASG_COSMOS_ID }}
+  TF_VAR_network_asg_storage_id: ${{ vars.NETWORK_ASG_STORAGE_ID }}
+  TF_VAR_network_asg_ai_foundry_id: ${{ vars.NETWORK_ASG_AI_FOUNDRY_ID }}
+  TF_VAR_network_asg_content_safety_id: ${{ vars.NETWORK_ASG_CONTENT_SAFETY_ID }}
   ARM_USE_OIDC: true
 
 jobs:

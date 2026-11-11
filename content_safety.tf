@@ -48,3 +48,10 @@ resource "azurerm_private_endpoint" "content_safety" {
     private_dns_zone_ids = [azurerm_private_dns_zone.cognitiveservices.id]
   }
 }
+
+# El PE se crea con azurerm_private_endpoint directo (sin modulo AVM), asi que
+# la pertenencia al ASG es un recurso aparte. Ver variables.tf.
+resource "azurerm_private_endpoint_application_security_group_association" "content_safety" {
+  private_endpoint_id           = azurerm_private_endpoint.content_safety.id
+  application_security_group_id = var.network_asg_content_safety_id
+}
