@@ -34,7 +34,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "cosmos_sql" {
 module "cosmos" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag - mismo criterio que azure-virtual-network.
   source  = "Azure/avm-res-documentdb-databaseaccount/azurerm"
-  version = "0.11.0"
+  version = "0.12.0"
 
   name                = var.cosmos_account_name
   location            = var.location
