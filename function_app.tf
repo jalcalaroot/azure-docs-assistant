@@ -21,7 +21,7 @@ resource "azurerm_user_assigned_identity" "function_app" {
 module "function_app_storage" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-storage-storageaccount/azurerm"
-  version = "0.10.0"
+  version = "0.11.0"
 
   #checkov:skip=CKV_AZURE_33:este storage account no expone Queue service para uso externo, no aplica.
   #checkov:skip=CKV_AZURE_206:LRS por costo - storage de deployment/estado interno del Function App, no datos de negocio.
@@ -163,7 +163,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "azurewebsites" {
 module "function_app" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-web-site/azurerm"
-  version = "0.23.0"
+  version = "0.24.1"
 
   location                 = var.location
   name                     = var.function_app_name
