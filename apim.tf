@@ -45,7 +45,7 @@ resource "azurerm_monitor_diagnostic_setting" "apim_public_ip" {
 module "apim" {
   #checkov:skip=CKV_TF_1:pinned por version semver del Terraform Registry, no un git tag.
   source  = "Azure/avm-res-apimanagement-service/azurerm"
-  version = "0.9.0"
+  version = "0.10.0"
 
   name                = var.apim_name
   location            = var.location
